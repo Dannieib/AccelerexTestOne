@@ -5,7 +5,8 @@ Part 1: How to run
 a. install .net framework/.net bundle or package to your system.
 b. Download Visual Studio IDE or after successful step A, open your COMMANDLINE
 c. navigate to location where proj is, on the directory bar, type CMD, it'd auto-open CMD with path, Then Copy/Paste "dotnet restore" to help restore all packages
-d. Then, type "dotnet run"**
+d. Then, type "dotnet run"
+e. Once successfull: copy/paste this: https://localhost:5001/swagger/index.html or https://localhost:5000/swagger/index.html... Both works inasmuch a those specified ports are free.**
 
 **if using IDE, ver simple, follow this link :https://www.c-sharpcorner.com/article/creating-web-api-project-asp-net-mvc/**
 
