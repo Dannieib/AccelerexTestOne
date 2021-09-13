@@ -13,16 +13,16 @@ namespace AccelerexTestOne.Controllers
     [Route("api/[controller]")]
     public class OpeningHoursController : ControllerBase
     {
-        public OpeningHoursController()
+        private readonly ITimeFormattingService _timeFormattingService;
+        public OpeningHoursController(ITimeFormattingService timeFormattingService)
         {
-            
+            _timeFormattingService = timeFormattingService;
         }
 
         [HttpPost]
         public async Task<IActionResult> ProcessOpeningHours(DaysModel model)
         {
-            var output = await new TimeFormattingService()
-                                                             .ProcessTimeFormats(model);
+            var output = await _timeFormattingService.ProcessTimeFormats(model);
             return Ok(output);
         }
     }

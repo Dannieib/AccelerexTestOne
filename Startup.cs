@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AccelerexTestOne.Logic;
 using Microsoft.OpenApi.Models;
 
 namespace AccelerexTestOne
@@ -31,6 +32,7 @@ namespace AccelerexTestOne
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Test API", Version = "v1" });
             });
+            services.AddTransient<ITimeFormattingService, TimeFormattingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

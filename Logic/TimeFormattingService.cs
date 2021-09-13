@@ -10,12 +10,10 @@ using Newtonsoft.Json;
 
 namespace AccelerexTestOne.Logic
 {
-    public class TimeFormattingService
+    public class TimeFormattingService: ITimeFormattingService
     { 
 
         public string Close = "CLOSED";
-        public string Open = "OPEN";
-
         public async Task<string> ProcessTimeFormats(DaysModel model)
         {
             var dict = new Dictionary<Enum, dynamic>
@@ -30,32 +28,35 @@ namespace AccelerexTestOne.Logic
             };
 
             var response = new List<DayResponseModel>();
-            var Formatted = string.Empty;
+            List<string> output = new List<string>();
 
             foreach (var item in dict)
             {
                 if (item.Value.Count<=0)
                 {
-                    response.Add(new DayResponseModel
-                    {
-                        Formatted = $"{item.Key}: {Close}"
-                    });
+                    output.Add($"{item.Key}: {Close}");
                 }
                 else
                 {
                     foreach(var i in item.Value)
                     {
                         var resp = ProcessDays.IterateAndBox((DaysEnum)item.Key, item.Value);
-                        response.Add(new DayResponseModel
+                        var dictResp = new Dictionary<string, List<string>>
                         {
-                            Formatted = String.Join(",", resp)
-                        });
+                            {item.Key.ToString(), resp}
+                        };
+
+                        foreach (var dictItem in dictResp)
+                        {
+                            if (!output.Contains(dictItem.Value[0]))
+                            {
+                                output.Add(String.Join(",", dictItem.Value));
+                            }
+                        }
                     }
                 }
             }
-
-            //for
-            return JsonConvert.SerializeObject(Formatted);
+            return JsonConvert.SerializeObject(output);
         }
     }
 }
