@@ -11,8 +11,7 @@ using Newtonsoft.Json;
 namespace AccelerexTestOne.Logic
 {
     public class TimeFormattingService: ITimeFormattingService
-    { 
-
+    {
         public string Close = "CLOSED";
         public async Task<string> ProcessTimeFormats(DaysModel model)
         {
@@ -26,8 +25,7 @@ namespace AccelerexTestOne.Logic
                 {DaysEnum.Saturday, model.saturday},
                 {DaysEnum.Sunday, model.sunday}
             };
-
-            var response = new List<DayResponseModel>();
+            
             List<string> output = new List<string>();
 
             foreach (var item in dict)
