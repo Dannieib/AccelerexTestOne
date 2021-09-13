@@ -18,9 +18,6 @@ namespace AccelerexTestOne.Logic
 
         public async Task<string> ProcessTimeFormats(DaysModel model)
         {
-            //string[] days_to_process =
-            //    {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
-
             var dict = new Dictionary<Enum, dynamic>
             {
                 {DaysEnum.Monday, model.monday},
@@ -33,6 +30,7 @@ namespace AccelerexTestOne.Logic
             };
 
             var response = new List<DayResponseModel>();
+            var Formatted = string.Empty;
 
             foreach (var item in dict)
             {
@@ -40,47 +38,24 @@ namespace AccelerexTestOne.Logic
                 {
                     response.Add(new DayResponseModel
                     {
-                        Formatted = $"{item.Key}: {Close}",
+                        Formatted = $"{item.Key}: {Close}"
                     });
                 }
                 else
                 {
                     foreach(var i in item.Value)
                     {
-                        ProcessDays.IterateAndBox((DaysEnum)item.Key, item.Value);// ((DaysEnum)item.Key, item.Value);
+                        var resp = ProcessDays.IterateAndBox((DaysEnum)item.Key, item.Value);
                         response.Add(new DayResponseModel
                         {
-                            Formatted = $"{item.Key}: {(object)i}",
+                            Formatted = String.Join(",", resp)
                         });
                     }
                 }
             }
 
-            return JsonConvert.SerializeObject(response);
+            //for
+            return JsonConvert.SerializeObject(Formatted);
         }
-
-       
-    
-
-        //private ValueModel Process(DaysModelDto dayDto)
-        //{
-        //    string[] period = { };
-        //    var eee = new DaysModelDto();
-
-        //  if(dayDto.)
-        //    return dto;
-        //}
-
-        //public Task<DateTime> DatetimeFormatterHelper(int time, string periodDesc)
-        //{
-        //    if (time > 0)
-        //    {
-        //        return 
-        //    }
-
-        //    return null;
-        //}
-        
-
     }
 }

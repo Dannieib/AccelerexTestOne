@@ -9,100 +9,129 @@ namespace AccelerexTestOne.HelperClass
 {
     public static class ProcessDays
     {
-        //public static string[] ProcessDaysObject(DaysModelDto model)
-        //{
-        //    string[] periods = { };
-        //    DateTime[] timing = { };
-
-        //    var res = model switch
-        //    {
-
-        //    };
-        //    return res;
-
-        //}
-
-        public static dynamic IterateAndBox(DaysEnum enums, dynamic model)
+        public static List<string> IterateAndBox(DaysEnum enums, dynamic model)
         {
 
-            string[] beautifiedOutput = { };
+            var beautifiedOutput = new List<string>();
+            List<string> concat = new List<string>();
 
-            foreach (var item in model)
+            if (enums == DaysEnum.Monday)
             {
-                if (enums == DaysEnum.Monday)
+                foreach (var item in model)
                 {
                     var boxed = (Monday) item;
                     var res = ProcessTimingsAndPeriods(boxed.type, boxed.value);
-                    beautifiedOutput.Append(res);
+                    beautifiedOutput.Add(res);
                 }
-                else if (enums == DaysEnum.Tuesday)
+                var time = String.Join("-", beautifiedOutput);
+                var forttingOutput = $"{enums}:{time}";
+                concat.Add(forttingOutput);
+            }
+            else if (enums == DaysEnum.Tuesday)
+            {
+                foreach (var item in model)
                 {
-                    
                     var boxed = (Tuesday) item;
                     var res = ProcessTimingsAndPeriods(boxed.type, boxed.value);
-                    beautifiedOutput.Append(res);
+                    beautifiedOutput.Add(res);
                 }
-                else if (enums == DaysEnum.Wednesday)
+
+                var time = String.Join("-", beautifiedOutput);
+                var forttingOutput = $"{enums}:{time}";
+                concat.Add(forttingOutput);
+            }
+            else if (enums == DaysEnum.Wednesday)
+            {
+                foreach (var item in model)
                 {
                     var boxed = (Wednesday) item;
                     var res = ProcessTimingsAndPeriods(boxed.type, boxed.value);
-                    beautifiedOutput.Append(res);
+                    beautifiedOutput.Add(res);
                 }
-                else if (enums == DaysEnum.Thursday)
+
+                var time = String.Join("-", beautifiedOutput);
+                var forttingOutput = $"{enums}:{time}";
+                concat.Add(forttingOutput);
+            }
+            else if (enums == DaysEnum.Thursday)
+            {
+                foreach (var item in model)
                 {
                     var boxed = (Thursday) item;
                     var res = ProcessTimingsAndPeriods(boxed.type, boxed.value);
-                    beautifiedOutput.Append(res);
+                    beautifiedOutput.Add(res);
                 }
-                else if (enums == DaysEnum.Friday)
+
+                var time = String.Join("-", beautifiedOutput);
+                var forttingOutput = $"{enums}:{time}";
+                concat.Add(forttingOutput);
+            }
+            else if (enums == DaysEnum.Friday)
+            {
+                foreach (var item in model)
                 {
-                    
                     var boxed = (Friday) item;
                     var res = ProcessTimingsAndPeriods(boxed.type, boxed.value);
-                    beautifiedOutput.Append(res);
+                    beautifiedOutput.Add(res);
                 }
-                else if (enums == DaysEnum.Saturday)
+
+                var time = String.Join("-", beautifiedOutput);
+                var forttingOutput = $"{enums}:{time}";
+                concat.Add(forttingOutput);
+            }
+            else if (enums == DaysEnum.Saturday)
+            {
+                foreach (var item in model)
                 {
                     var boxed = (Saturday) item;
                     var res = ProcessTimingsAndPeriods(boxed.type, boxed.value);
-                    beautifiedOutput.Append(res);
+                    beautifiedOutput.Add(res);
                 }
-                else if (enums == DaysEnum.Sunday)
+
+                var time = String.Join("-", beautifiedOutput);
+                var forttingOutput = $"{enums}:{time}";
+                concat.Add(forttingOutput);
+            }
+            else if (enums == DaysEnum.Sunday)
+            {
+                foreach (var item in model)
                 {
                     var boxed = (Sunday) item;
                     var res = ProcessTimingsAndPeriods(boxed.type, boxed.value);
-                    beautifiedOutput.Append(res);
+                    beautifiedOutput.Add(res);
                 }
+
+                var time = String.Join("-", beautifiedOutput);
+                var forttingOutput = $"{enums}:{time}";
+                concat.Add(forttingOutput);
             }
-            return beautifiedOutput;
+        
+            return concat;
         }
 
         public static string ProcessTimingsAndPeriods(string period, int time)
         {
             string[] timing = { };
             string[] periods = { };
-            var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(time).TimeOfDay;
-            //timing.Append($"{dateTimeOffset:hh:mm:ss tt}");
-            //periods.Append(period);
-
-            return Format($"{dateTimeOffset:hh:mm:ss tt}", period);
+            var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(time).DateTime;
+            var dateFortmat = $"{dateTimeOffset:hh:mm:ss tt}";
+            return Format(dateFortmat, period);
         }
 
         private static string Format(string formatTime, string formatPeriod)
         {
-            string[] timesDict = {};
+            var timesDict = new List<string>();
 
-            if (formatTime == "open" )
+            if (formatPeriod == "open" )
             {
-                timesDict.Append($"{formatTime}");
+                timesDict.Add($"{formatTime}");
             }
             else
             { 
-                timesDict.Append($"{formatTime}");
+                timesDict.Add($"{formatTime}");
             }
         
             return String.Join(" ", timesDict);
-
         }
 
         public static string FormatPeriod(string periods)
